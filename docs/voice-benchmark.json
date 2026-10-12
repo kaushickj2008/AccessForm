@@ -1,0 +1,154 @@
+{
+  "measuredAt": "2026-10-11T15:08:59.268Z",
+  "kind": "eSpeak-generated synthetic audio; NOT human microphone validation",
+  "model": "ggml-base.en.bin",
+  "utterances": 20,
+  "wordErrorRate": 0.5396825396825397,
+  "wordAccuracy": 0.46031746031746035,
+  "meanLatencyMs": 439.05,
+  "p50LatencyMs": 205,
+  "p95LatencyMs": 317,
+  "latencyScope": "ASR process launch, model load, inference and output read. Excludes microphone/VAD/TTS.",
+  "results": [
+    {
+      "expected": "next",
+      "recognized": "next",
+      "ms": 4763,
+      "wordErrors": 0,
+      "referenceWords": 1
+    },
+    {
+      "expected": "go back",
+      "recognized": "Go Bach!",
+      "ms": 232,
+      "wordErrors": 1,
+      "referenceWords": 2
+    },
+    {
+      "expected": "repeat",
+      "recognized": "Repeat.",
+      "ms": 193,
+      "wordErrors": 0,
+      "referenceWords": 1
+    },
+    {
+      "expected": "review",
+      "recognized": "review.",
+      "ms": 194,
+      "wordErrors": 0,
+      "referenceWords": 1
+    },
+    {
+      "expected": "undo",
+      "recognized": "I do.",
+      "ms": 195,
+      "wordErrors": 2,
+      "referenceWords": 1
+    },
+    {
+      "expected": "pause listening",
+      "recognized": "pause listening",
+      "ms": 194,
+      "wordErrors": 0,
+      "referenceWords": 2
+    },
+    {
+      "expected": "resume listening",
+      "recognized": "for a new listening.",
+      "ms": 209,
+      "wordErrors": 3,
+      "referenceWords": 2
+    },
+    {
+      "expected": "confirm submit",
+      "recognized": "Confirm submit.",
+      "ms": 198,
+      "wordErrors": 0,
+      "referenceWords": 2
+    },
+    {
+      "expected": "change my email",
+      "recognized": "Change my email.",
+      "ms": 206,
+      "wordErrors": 0,
+      "referenceWords": 3
+    },
+    {
+      "expected": "change my full name",
+      "recognized": "Change my full name.",
+      "ms": 207,
+      "wordErrors": 0,
+      "referenceWords": 4
+    },
+    {
+      "expected": "spell",
+      "recognized": "Bell.",
+      "ms": 194,
+      "wordErrors": 1,
+      "referenceWords": 1
+    },
+    {
+      "expected": "a as in apple",
+      "recognized": "on the Apple.",
+      "ms": 217,
+      "wordErrors": 3,
+      "referenceWords": 4
+    },
+    {
+      "expected": "n as in november",
+      "recognized": "and I'm in November.",
+      "ms": 207,
+      "wordErrors": 2,
+      "referenceWords": 4
+    },
+    {
+      "expected": "change the third letter to n",
+      "recognized": "Change the third letter N",
+      "ms": 204,
+      "wordErrors": 1,
+      "referenceWords": 6
+    },
+    {
+      "expected": "test student",
+      "recognized": "Test you done.",
+      "ms": 201,
+      "wordErrors": 2,
+      "referenceWords": 2
+    },
+    {
+      "expected": "test dot student at example dot com",
+      "recognized": "test.stubantatample.com",
+      "ms": 227,
+      "wordErrors": 7,
+      "referenceWords": 7
+    },
+    {
+      "expected": "nine zero zero zero zero one two three four five",
+      "recognized": "And I'm 0, 0, 0, 0, 0, 1, 2, 3, 4, 5.",
+      "ms": 317,
+      "wordErrors": 12,
+      "referenceWords": 10
+    },
+    {
+      "expected": "computer science",
+      "recognized": "Computer Science",
+      "ms": 199,
+      "wordErrors": 0,
+      "referenceWords": 2
+    },
+    {
+      "expected": "first year",
+      "recognized": "first year.",
+      "ms": 205,
+      "wordErrors": 0,
+      "referenceWords": 2
+    },
+    {
+      "expected": "I need help paying for books",
+      "recognized": "I need help paying for books.",
+      "ms": 219,
+      "wordErrors": 0,
+      "referenceWords": 6
+    }
+  ]
+}

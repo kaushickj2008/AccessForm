@@ -1,0 +1,11 @@
+{
+  "name": "AccessForm — your form, your way",
+  "short_name": "AccessForm",
+  "description": "Synthetic accessible form demo. Keyboard, switch and local voice.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f5ee",
+  "theme_color": "#17685a",
+  "icons": [{"src":"./assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]
+}

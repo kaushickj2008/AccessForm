@@ -1,0 +1,19 @@
+{
+  "name": "accessform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "GPL-3.0-or-later",
+  "description": "Synthetic, offline-capable accessible application form demo",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "test": "node --test tests/*.test.js",
+    "sim": "node scripts/sim.mjs",
+    "build": "node scripts/build.mjs",
+    "preview:web": "node scripts/serve-web.mjs",
+    "benchmark": "node scripts/benchmark-voice.mjs"
+  },
+  "dependencies": { "ws": "8.18.3" }
+}

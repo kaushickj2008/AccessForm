@@ -1,0 +1,22 @@
+node_modules/
+dist/
+vendor/
+models/
+.cache/
+.voice-tmp/
+.voice/
+submissions/
+benchmark-audio/
+*.tar.gz
+.DS_Store
+.env*
+.deploy/
+.vercel/
+test-results/
+
+# Human microphone recordings and local benchmark exports
+*.wav
+*.mp3
+*.m4a
+recordings/
+voice-gate-results*.json

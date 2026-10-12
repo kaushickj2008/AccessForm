@@ -1,0 +1,16 @@
+import { synthesize, transcribe, status } from '../voice/server.js';
+import { encodeWav, resample } from '../voice/audio.js';
+import { writeFile, readFile } from 'node:fs/promises';
+import { basename } from 'node:path';
+const corpus=['next','go back','repeat','review','undo','pause listening','resume listening','confirm submit','change my email','change my full name','spell','a as in apple','n as in november','change the third letter to n','test student','test dot student at example dot com','nine zero zero zero zero one two three four five','computer science','first year','I need help paying for books'];
+function decodeWav(buffer){let rate=0,bits=0,channels=0,data;for(let p=12;p+8<=buffer.length;){const kind=buffer.toString('ascii',p,p+4),size=buffer.readUInt32LE(p+4);if(kind==='fmt '){channels=buffer.readUInt16LE(p+10);rate=buffer.readUInt32LE(p+12);bits=buffer.readUInt16LE(p+22);}if(kind==='data'){data=buffer.subarray(p+8,Math.min(buffer.length,p+8+size));break;}p+=8+size+(size%2);}if(bits!==16||channels!==1||!data)throw new Error('Benchmark requires mono PCM16 audio');const samples=new Float32Array(Math.floor(data.length/2));for(let i=0;i<samples.length;i++)samples[i]=data.readInt16LE(i*2)/32768;return Buffer.from(encodeWav(resample(samples,rate)));}
+const words=s=>s.toLowerCase().replace(/[^a-z0-9\s]/g,'').trim().split(/\s+/).filter(Boolean);
+function distance(a,b){let row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){const next=[i];for(let j=1;j<=b.length;j++)next[j]=Math.min(next[j-1]+1,row[j]+1,row[j-1]+(a[i-1]===b[j-1]?0:1));row=next;}return row[b.length];}
+const config=await status();if(!config.asr||!config.tts){process.stderr.write(config.reason+'\n');process.exit(1);}
+// Optional manifest: exactly 20 synthetic utterances, each {text,wav}; no real personal data.
+const manifest=process.argv[2]?JSON.parse(await readFile(process.argv[2],'utf8')):null;
+if(manifest&&manifest.length!==20)throw new Error('Provide exactly 20 utterances.');
+const results=[];for(let i=0;i<20;i++){const expected=manifest?manifest[i].text:corpus[i];const audio=decodeWav(manifest?await readFile(manifest[i].wav):await synthesize(expected));const actual=await transcribe(audio);const reference=words(expected),hypothesis=words(actual.text);results.push({expected,recognized:actual.text,ms:actual.ms,wordErrors:distance(reference,hypothesis),referenceWords:reference.length});process.stdout.write(`Measured ${i+1}/20\n`);}
+const errors=results.reduce((s,r)=>s+r.wordErrors,0),count=results.reduce((s,r)=>s+r.referenceWords,0),times=results.map(r=>r.ms).sort((a,b)=>a-b);
+const report={measuredAt:new Date().toISOString(),kind:manifest?'supplied synthetic recordings':'eSpeak-generated synthetic audio; NOT human microphone validation',model:basename(config.model),utterances:20,wordErrorRate:errors/count,wordAccuracy:1-errors/count,meanLatencyMs:results.reduce((s,r)=>s+r.ms,0)/20,p50LatencyMs:times[9],p95LatencyMs:times[18],latencyScope:'ASR process launch, model load, inference and output read. Excludes microphone/VAD/TTS.',results};
+await writeFile(process.env.BENCHMARK_REPORT || 'docs/voice-benchmark.json',JSON.stringify(report,null,2)+'\n');process.stdout.write(JSON.stringify({...report,results:undefined},null,2)+'\n');

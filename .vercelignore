@@ -1,0 +1,11 @@
+.git
+.openai
+.deploy
+.voice
+models
+vendor
+submissions
+node_modules
+test-results
+benchmark-audio
+.env*
